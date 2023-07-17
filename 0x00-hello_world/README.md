@@ -29,3 +29,5 @@ gcc -E $CFILE -o c :- Runs a file through the preprocessor and saves it in a fil
 gcc -c $CFILE -o main.o :- Compiles a file but does not link
 gcc -S $CFILE -o c :- generates assembly code of a C file and saves it in an output file
 gcc $CFILE -o [fileName] :-Compiles a C file and creates and executable file
+
+use a sudo apt install libc6-dev-i386 :- to be able to test the -m32 and -m64 gcc option
