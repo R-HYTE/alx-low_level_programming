@@ -1,11 +1,9 @@
 #include "main.h"
 
- /**
-  * jack_bauer - Print minute of the day of Jack Bauer
-  * @void: No parameters being passed
-  * Return: void
-  */
-
+/**
+ * jack_bauer - Print minute of the day of Jack Bauer
+ * Return void
+ */
 void jack_bauer(void)
 {
 	int a;
