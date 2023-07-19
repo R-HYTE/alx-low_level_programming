@@ -6,7 +6,7 @@
 int main(void)
 {
 	int i, n = 98;
-	int term1 = 1, term2 = 2;
+	unsigned long term1 = 1, term2 = 2;
 	int nextTerm = term1 + term2;
 
 	printf("%d, %d, ", term1, term2);
