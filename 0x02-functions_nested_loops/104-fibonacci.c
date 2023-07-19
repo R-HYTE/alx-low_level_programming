@@ -7,12 +7,12 @@ int main(void)
 {
 	int i, n = 98;
 	unsigned long term1 = 1, term2 = 2;
-	int nextTerm = term1 + term2;
+	unsigned long nextTerm = term1 + term2;
 
-	printf("%d, %d, ", term1, term2);
+	printf("%lu, %lu, ", term1, term2);
 	for (i = 3; i <= n; ++i)
 	{
-		printf("%d, ", nextTerm);
+		printf("%lu, ", nextTerm);
 		term1 = term2;
 		term2 = nextTerm;
 		nextTerm = term1 + term2;
