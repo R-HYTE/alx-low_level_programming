@@ -6,21 +6,21 @@
  */
 int main(void)
 {
-	long prime = 612852475143, divisor;
+	long int i, n, d;
 
-	while (divisor < (prime / 2)
+	n = 612852475143;
+	for (i = 1; i <= n; i++)
 	{
-		if ((prime % 2) == 0)
+		if (n % i == 0)
 		{
-			prime /= 2;
-			continue;
-		}
-		for (divisor = 3; divisor < (prime / 2); divisor += 2)
-		{
-			if ((prime % divisor) == 0)
-			prime /= divisor;
+			if (n == i)
+			{
+				printf("%ld\n", i);
+				break;
+			}
+			d = n / i;
+			n = d;
 		}
 	}
-	printf("%ld\n", prime);
 	return (0);
 }
