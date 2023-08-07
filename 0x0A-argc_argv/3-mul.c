@@ -5,7 +5,7 @@
  * main - Multiplies two numbers
  * @argc: Agrgument passed into main
  * @argv: Argument passed into main
- * Return: 
+ * Return: 0 (Success)
  */
 int main(int argc, char *argv[])
 {
@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
 /**
  * atoi - converts string to integer
  * @s: String passed for conversion
- * Return: int converted 
+ * Return: int converted
  */
 int atoi(char *s)
 {
