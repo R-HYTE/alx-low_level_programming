@@ -2,7 +2,7 @@
 
 /**
  * str_concat - function that concatenates two strings
- * @s1: First set of characters passed 
+ * @s1: First set of characters passed
  * @s2: Second set of charcaters passed
  * Return: arr which is the address of the newly allocated space
  * , NULL if NULL is passed
