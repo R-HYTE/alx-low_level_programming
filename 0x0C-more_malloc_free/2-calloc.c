@@ -1,7 +1,8 @@
 #include "main.h"
 
 /**
- * @nmemb: # of mem blocks allocated
+ * _calloc - how calloc operates
+ * @nmemb: number of mem blocks allocated
  * @size: size of each element in nmemb
  * Return: pointer to the allocated memory
  */
