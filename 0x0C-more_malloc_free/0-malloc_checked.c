@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * malloc_checked - alocate memory using malloc
+ * malloc_checked - malloc to allocate dynamic mem
  *@b: argument passed into the function
  * Return: void
  */
@@ -10,9 +10,9 @@ void *malloc_checked(unsigned int b)
 	void *ptr;
 
 	ptr = malloc(b);
-	if (ptr != NULL)
+	if (ptr == NULL)
 	{
-		return (ptr);
+		exit(98);
 	}
-	exit (98);
+	return (ptr);
 }
