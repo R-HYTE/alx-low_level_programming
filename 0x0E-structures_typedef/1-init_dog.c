@@ -2,6 +2,7 @@
 /**
  * init_dog - Function initializes a var of type struct
  * @d: input parameter
+ * @name: input parameter
  * @age: input parameter
  * @owner: input parameter
  * Return: void
