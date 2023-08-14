@@ -7,7 +7,7 @@
  *@owner: member of the structure
  */
 
-struct dog
+typedef struct dog dog_t
 {
 	char *name;
 	float age;
