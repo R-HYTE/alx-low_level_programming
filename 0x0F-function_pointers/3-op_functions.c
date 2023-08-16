@@ -37,31 +37,23 @@ int op_mul(int a, int b)
  * op_div - dividing function
  * @a: parameter
  * @b: parameter
- * Return: quotient if valid and 100 Otherwise
+ * Return: quotient after division
  */
 
 
 int op_div(int a, int b)
 {
-	if (b != 0)
-		return (a / b);
-
-	printf("Error\n");
-	return (100);
+	return (a / b);
 }
 /**
  * op_mod - modulating function
  * @a: parameters
  * @b: parameters
- * Return: remainder if valid and 100 Otherwise
+ * Return: remainder after division
  */
 
 
 int op_mod(int a, int b)
 {
-	if (b != 0)
-		return (a % b);
-
-	printf("Error\n");
-	return (100);
+	return (a % b);
 }
