@@ -5,7 +5,7 @@
 /**
  * print_strings - function that prints strings with separators in between them
  * @separator: pointer to the character acting as a separator
- * @int: Number of strings to be passed as argument
+ * @n: Number of strings to be passed as argument
  * Return: Void
  */
 void print_strings(const char *separator, const unsigned int n, ...)
