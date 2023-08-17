@@ -1,7 +1,6 @@
 #include "3-calc.h"
-#include <stdlib.h>
 #include <stdio.h>
-
+#include <stdlib.h>
 /**
  * main - Entry point
  * @argc: parameter counting inputs in the CLI
