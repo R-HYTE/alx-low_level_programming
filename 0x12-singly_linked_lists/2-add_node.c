@@ -3,7 +3,7 @@
 /**
  * add_node - func that adds a node at the beginning of a list
  * @head: pointer to head which is also a pointer
- * @str: string we want to insert to 
+ * @str: string we want to insert to
  * Return: pointer to the first node, NULL otherwise
  */
 list_t *add_node(list_t **head, const char *str)
