@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "lists.h"
 
 /**
@@ -15,15 +14,13 @@ size_t print_listint(const listint_t *h)
 	if (current == NULL)
 	{
 		printf("Error\n");
-		exit(0);
+		return (0);
 	}
-	while (current->next != NULL)
+	while (current)
 	{
 		printf("%d\n", current->n);
 		num_of_nodes++;
 		current = current->next;
 	}
-	printf("%d\n", current->n);
-	num_of_nodes++;
 	return (num_of_nodes);
 }
