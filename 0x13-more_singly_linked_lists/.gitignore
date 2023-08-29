@@ -1,0 +1,13 @@
+# Ignore common executable file extensions
+*.exe
+*.out
+*.app
+
+# Ignore files with no extension that might be executables
+# Use this if your executables have no extension
+a
+
+# Ignore compiled code and build artifacts
+/build/
+/bin/
+
