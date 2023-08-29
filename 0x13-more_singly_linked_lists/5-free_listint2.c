@@ -9,7 +9,7 @@
  */
 void free_listint2(listint_t **head)
 {
-	listint_t *current, *next;
+	listint_t *next;
 
 	if (head == NULL || *head == NULL)
 	{
@@ -17,12 +17,11 @@ void free_listint2(listint_t **head)
 		return;
 	}
 
-	current = *head;
-	while (current)
+	while (*head)
 	{
-		next = current->next; /*Save next pointer*/
-		free(current); /*Free the current node*/
-		current = next; /*Move to the next node*/
+		next = (*head)->next; /*Save next pointer*/
+		free(*head); /*Free the current node*/
+		(*head) = next; /*Move to the next node*/
 	}
 
 	*head = NULL; /*Set the head pointer to NULL to indicate empty list*/
