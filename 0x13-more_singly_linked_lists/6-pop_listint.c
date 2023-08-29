@@ -11,8 +11,8 @@ int pop_listint(listint_t **head)
 	int n;
 	listint_t *new_head;
 
-	/*check if head or *head is NULL*/
-	if (head == NULL || *head == NULL)
+	/*check if head addresses ar what is assigned*/
+	if (!head || !(*head))
 		return (0);
 
 	n = (*head)->n;
