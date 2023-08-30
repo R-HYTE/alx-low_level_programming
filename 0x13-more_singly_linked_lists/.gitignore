@@ -6,6 +6,21 @@
 # Ignore files with no extension that might be executables
 # Use this if your executables have no extension
 a
+b
+c
+d
+e
+f
+g
+h
+i
+j
+k
+l
+m
+n
+o
+p
 
 # Ignore compiled code and build artifacts
 /build/
