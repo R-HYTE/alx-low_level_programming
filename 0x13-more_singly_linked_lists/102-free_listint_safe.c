@@ -9,30 +9,33 @@
  */
 size_t free_listint_safe(listint_t **h)
 {
-	listint_t *current, *temp;
+	listint_t *current;
 	size_t len = 0;
+	int difference;
 
-	if (!h || !*h)
+	if (!h || !(*h))
 		return (0);
 
-	current = (*h);
-	while (current)
+	while (*h)
 	{
-		len++;
-		temp = current->next;
-
-		/*Check for circular reference*/
-		if (temp >= current)
+		difference = *h - (*h)->next;
+		if (difference > 0)
 		{
-			*h = NULL; /*Set the original pointer to NULL to break the reference.*/
-			return (len);
+			current = (*h)->next;
+			free(*h);
+			*h = current;
+			len++;
 		}
-
-		free(current);
-		current = temp;
+		else
+		{
+			free(*h);
+			*h = NULL;
+			len++;
+			break;
+		}
 	}
 
-	*h = NULL; /*Set the original pointer to NULL to indicate the list is freed.*/
+	*h = NULL;
 
 	return (len);
 }
