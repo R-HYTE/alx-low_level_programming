@@ -9,9 +9,18 @@
  */
 int get_bit(unsigned long int n, unsigned int index)
 {
+	int bitValue;
+	unsigned long int mask;
 
-	/*Right shift 'num' by 'index' and perform basic bitwise AND with 1*/
-	int bitValue = (n >> index) & 1;
+	/*Check if the index is within the valid range*/
+	if (index >= sizeof(unsigned long int) * 8)
+		return (-1); /*Index is out of range*/
+
+	/*Create a mask with a 1 at the desired index*/
+	mask = 1UL << index;
+
+	/*Use bitwise AND to check if the bit at the index is 1 or 0*/
+	bitValue = (n & mask) ? 1 : 0;
 
 	return (bitValue);
 }
