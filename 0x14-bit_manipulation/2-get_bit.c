@@ -9,11 +9,9 @@
  */
 int get_bit(unsigned long int n, unsigned int index)
 {
-	/*Create a mask with a 1 at the desired index and 0s elsewhere*/
-	int mask = 1 << index;
 
-	/*Use bitwise AND to check if the bit at the index is 1 or 0*/
-	int bitValue = (n & mask) ? 1: 0;
+	/*Right shift 'num' by 'index' and perform basic bitwise AND with 1*/
+	int bitValue = (n >> index) & 1;
 
 	return (bitValue);
 }
