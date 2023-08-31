@@ -2,8 +2,8 @@
 #include <stdio.h>
 
 /**
- * print_binary - 
- * @n:
+ * print_binary - function that gets binary representation of a number
+ * @n: number to get represented in binary
  * Return: void
  */
 void print_binary(unsigned long int n)
