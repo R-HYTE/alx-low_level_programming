@@ -13,7 +13,7 @@ int get_bit(unsigned long int n, unsigned int index)
 	int mask = 1 << index;
 
 	/*Use bitwise AND to check if the bit at the index is 1 or 0*/
-	int result = (n & mask) >> index;
+	int bitValue = (n & mask) ? 1: 0;
 
-	return (result);
+	return (bitValue);
 }
