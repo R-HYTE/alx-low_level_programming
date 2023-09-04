@@ -21,6 +21,6 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	lenw = write(STDOUT_FILENO, buffer, lenr);
 
 	free(buffer);
-	close (fp);
+	close(fp);
 	return (lenw);
 }
