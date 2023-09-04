@@ -18,15 +18,12 @@ ssize_t read_textfile(const char *filename, size_t letters)
 		errno = EINVAL; /*Invalid argument*/
 		return (0);
 	}
-
 	file_d = open(filename, O_RDONLY);
 	if (file_d == -1)
-	{
-		/*Failed to open the file*/
+	{/*Failed to open the file*/
 		perror("open");
 		return (0);
 	}
-
 	buffer = malloc(sizeof(char) * letters);
 	if (buffer == NULL)
 	{
@@ -34,7 +31,6 @@ ssize_t read_textfile(const char *filename, size_t letters)
 		close(file_d);
 		return (0);
 	}
-
 	lenr = read(file_d, buffer, letters);
 	if (lenr == -1)
 	{
@@ -43,7 +39,6 @@ ssize_t read_textfile(const char *filename, size_t letters)
 		close(file_d);
 		return (0);
 	}
-
 	lenw = write(STDOUT_FILENO, buffer, lenr);
 	if (lenr != lenw || lenw != lenr)
 	{
@@ -51,10 +46,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
 		free(buffer);
 		close(file_d);
 		return (0);
-	}
-
-	free(buffer);
+	} free(buffer);
 	close(file_d);
-
 	return (lenw);
 }
