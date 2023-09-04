@@ -2,7 +2,7 @@
 #include <string.h>
 
 /**
- * append_text_to_file - Append text to an existing file with the given filename.
+ * append_text_to_file - Append text to an existing file given filename.
  * @filename: The name of the file to append to.
  * @text_content: The text content to append to the file.
  * Return: 1 (Success), -1 (Failure)
