@@ -3,7 +3,7 @@
 
 #include <stdio.h> /*For perror*/
 #include <stdlib.h> /*For malloc and free*/
-#include <errno.h> 
+#include <errno.h>
 #include <unistd.h> /*For open, close, read, write*/
 #include <fcntl.h> /*For file access modes*/
 
