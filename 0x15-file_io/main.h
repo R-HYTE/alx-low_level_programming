@@ -6,6 +6,9 @@
 #include <errno.h>
 #include <unistd.h> /*For open, close, read, write*/
 #include <fcntl.h> /*For file access modes*/
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <stdarg.h>
 
 int _putchar(char c);
 ssize_t read_textfile(const char *filename, size_t letters);
