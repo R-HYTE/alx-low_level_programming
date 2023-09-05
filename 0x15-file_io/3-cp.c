@@ -1,78 +1,91 @@
 #include "main.h"
-#define BUFFER_SIZE 1024
 
-void print_error(const char *format, ...)
+/**
+ * create_buffer - Allocates a buffer for file copying
+ * @destination_filename: Name of the destination file
+ * Return: Pointer to the allocated buffer
+ */
+char *create_buffer(char *destination_filename)
 {
-	va_list args; /*Define a variable argument list*/
+	char *copy_buffer;
 
-	va_start(args, format); /*Initialize the argument list*/
-	dprintf(STDERR_FILENO, format, args); /*Use dprintf to print the formatted error message to stderr*/
-	va_end(args); /*Clean up the argument list*/
+	/*Allocate a buffer of 1024 bytes*/
+	copy_buffer = malloc(sizeof(char) * 1024);
+
+	if (copy_buffer == NULL)
+	{
+		/*Handle memory allocation error*/
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", destination_filename);
+		exit(99);
+	}
+
+	return (copy_buffer);
 }
 
+/**
+ * close_file - Close a file descriptor
+ * @file_descriptor: The file descriptor to close
+ */
+void close_file(int file_descriptor)
+{
+	int close_result;
+
+	/*Close the file descriptor and check for errors*/
+	close_result = close(file_descriptor);
+
+	if (close_result == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", file_descriptor);
+		exit(100);
+	}
+}
+
+/**
+ * main - Copy the of one file to another
+ * @argc: Number of command-line arguments passed
+ * @argv: Array of command-line arguments passed
+ * Return: 0 (Success), Otehrwise error codes (Failure)
+ */
 int main(int argc, char *argv[])
 {
-	int fd_from, fd_to;
-	char buffer[BUFFER_SIZE];
-	ssize_t bytes_read, bytes_written;
+	int source_file, destination_file, bytes_read, bytes_written;
+	char *copy_buffer;
 
+	/*Check if the numbe rof commandè-line args is correct*/
 	if (argc != 3)
 	{
-		print_error("Usage: cp file_from file_to\n");
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
-	fd_from = open(argv[1], O_RDONLY);
-	if (fd_from == -1)
+	copy_buffer = create_buffer(argv[2]);/*Allocate a buffer for copying*/
+	source_file = open(argv[1], O_RDONLY);/*Open the source file for reading*/
+	bytes_read = read(source_file, copy_buffer, 1024);
+	destination_file = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	while (bytes_read > 0)
 	{
-		if (errno == EACCES)
+		/*Checks for errors when opening, reading, or writing*/
+		if (source_file == -1 || bytes_read == -1)
 		{
-			print_error("Permission denied to read from file %s\n", argv[1]);
-		} else
-		{
-			print_error("Error: Can't read from file %s\n", argv[1]);
+			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+			free(copy_buffer);
+			exit(98);
 		}
-		exit(98);
-	}
-	fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (fd_to == -1)
-	{
-		if (errno == EACCES)
+		/*Write data from buffer to the destination file*/
+		bytes_written = write(destination_file, copy_buffer, bytes_read);
+		if (destination_file == -1 || bytes_written == -1)
 		{
-			print_error("Permission denied to write to %s\n", argv[2]);
-		} else
-		{
-			print_error("Error: Can't write to %s\n", argv[2]);
-		}
-		close(fd_from);
-		exit(99);
-	}
-	while ((bytes_read = read(fd_from, buffer, BUFFER_SIZE)) > 0)
-	{
-		bytes_written = write(fd_to, buffer, bytes_read);
-		if (bytes_written != bytes_read)
-		{
-			print_error("Write error\n");
-			close(fd_from);
-			close(fd_to);
+			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+			free(copy_buffer);
 			exit(99);
 		}
+		/*Read more data from the source file*/
+		bytes_read = read(source_file, copy_buffer, 1024);
+		destination_file = open(argv[2], O_WRONLY | O_APPEND);
 	}
-	if (bytes_read == -1)
-	{
-		print_error("Read error\n");
-		close(fd_from);
-		close(fd_to);
-		exit(99);
-	}
-	if (close(fd_from) == -1)
-	{
-		print_error("Error: Can't close fd %u\n", fd_from);
-		exit(100);
-	}
-	if (close(fd_to) == -1)
-	{
-		print_error("Error: Can't close fd %u\n", fd_to);
-		exit(100);
-	}
+	free(copy_buffer);/*Free allocated buffer*/
+	/*Close source and destination files*/
+	close_file(source_file);
+	close_file(destination_file);
+
 	return (0);
 }
