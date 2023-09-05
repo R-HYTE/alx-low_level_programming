@@ -59,33 +59,50 @@ int main(int argc, char *argv[])
 	}
 	copy_buffer = create_buffer(argv[2]);/*Allocate a buffer for copying*/
 	source_file = open(argv[1], O_RDONLY);/*Open the source file for reading*/
-	bytes_read = read(source_file, copy_buffer, 1024);
+	if (source_file == -1)
+	{
+		/*Handle source file open error*/
+		dprintf(STDERR_FILENO, "Error: Can't open source file %s\n", argv[1]);
+		free(copy_buffer);
+		exit(98);
+	}
 	destination_file = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 	while (bytes_read > 0)
 	{
+		bytes_read = read(source_file, copy_buffer, 1024);
 		/*Checks for errors when opening, reading, or writing*/
-		if (source_file == -1 || bytes_read == -1)
+		if (bytes_read == -1)
 		{
 			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 			free(copy_buffer);
+			close_file(source_file);
 			exit(98);
 		}
-		/*Write data from buffer to the destination file*/
-		bytes_written = write(destination_file, copy_buffer, bytes_read);
-		if (destination_file == -1 || bytes_written == -1)
+		
+		destination_file = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+		if (destination_file == -1)
 		{
 			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
 			free(copy_buffer);
+			close_file(source_file);
 			exit(99);
 		}
 		/*Read more data from the source file*/
-		bytes_read = read(source_file, copy_buffer, 1024);
-		destination_file = open(argv[2], O_WRONLY | O_APPEND);
+		bytes_written = write(destination_file, copy_buffer, bytes_read);
+
+		if (bytes_written == -1)
+		{
+			dprintf(STDERR_FILENO, "Error: Can't write to destination file %s\n", argv[2]);
+			free(copy_buffer);
+			close_file(source_file);
+			close_file(destination_file);
+			exit(99);
+		}
+		close_file(destination_file);
 	}
 	free(copy_buffer);/*Free allocated buffer*/
 	/*Close source and destination files*/
 	close_file(source_file);
-	close_file(destination_file);
 
 	return (0);
 }
