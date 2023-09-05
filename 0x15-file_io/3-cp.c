@@ -24,13 +24,25 @@ int main(int argc, char *argv[])
 	fd_from = open(argv[1], O_RDONLY);
 	if (fd_from == -1)
 	{
-		print_error("Error: Can't read from file %s\n", argv[1]);
+		if (errno == EACCES)
+		{
+			print_error("Permission denied to read from file %s\n", argv[1]);
+		} else
+		{
+			print_error("Error: Can't read from file %s\n", argv[1]);
+		}
 		return (98);
 	}
 	fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd_to == -1)
 	{
-		print_error("Error: Can't write to %s\n", argv[2]);
+		if (errno == EACCES)
+		{
+			print_error("Permission denied to write to %s\n", argv[2]);
+		} else
+		{
+			print_error("Error: Can't write to %s\n", argv[2]);
+		}
 		close(fd_from);
 		return (99);
 	}
