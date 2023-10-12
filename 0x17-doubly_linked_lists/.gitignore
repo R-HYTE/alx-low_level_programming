@@ -1,0 +1,8 @@
+# Ignore all Tester files
+*main.c
+# Ignore executables
+*.exe
+a
+b
+c
+d, e
