@@ -1,0 +1,5 @@
+# Ignore the Object codes
+*.o
+
+# Ignore the executable files
+len
