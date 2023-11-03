@@ -78,7 +78,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
  */
 void free_node(hash_node_t *node)
 {
-        free(node->key);
-        free(node->value);
-        free(node);
+	free(node->key);
+	free(node->value);
+	free(node);
 }
